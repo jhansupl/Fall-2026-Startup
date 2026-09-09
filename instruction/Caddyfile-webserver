@@ -1,0 +1,80 @@
+cs260.click {
+  root * /usr/share/caddy
+  file_server
+  header Access-Control-Allow-Origin *
+  header -etag
+  header -server
+}
+
+learn.cs260.click {
+  redir https://github.com/webprogramming260
+}
+
+
+class.cs260.click {
+  root * /usr/share/caddy/utilities
+  file_server
+  header Access-Control-Allow-Origin *
+  header -etag
+  header -server
+  try_files {path} /
+}
+
+simon.cs260.click {
+  reverse_proxy * localhost:3000
+  header Cache-Control none
+  header -server
+  header Access-Control-Allow-Origin *
+}
+
+startup.cs260.click {
+  reverse_proxy * localhost:4000
+  header Cache-Control none
+  header -server
+  header Access-Control-Allow-Origin *
+}
+
+chat.cs260.click {
+  reverse_proxy * localhost:5000
+  header Cache-Control none
+}
+
+simon-html.cs260.click {
+  reverse_proxy * localhost:3001
+  header Cache-Control none
+}
+
+simon-css.cs260.click {
+  reverse_proxy * localhost:3002
+  header Cache-Control none
+}
+
+simon-service.cs260.click {
+  reverse_proxy * localhost:3004
+  header Cache-Control none
+}
+
+simon-db.cs260.click {
+  reverse_proxy * localhost:3005
+  header Cache-Control none
+}
+
+simon-db.cs260.click {
+  reverse_proxy * localhost:3006
+  header Cache-Control none
+}
+
+simon-websocket.cs260.click {
+  reverse_proxy * localhost:3007
+  header Cache-Control none
+}
+
+simon-react.cs260.click {
+  reverse_proxy * localhost:3008
+  header Cache-Control none
+}
+
+simon-pwa.cs260.click {
+  reverse_proxy * localhost:3009
+  header Cache-Control none
+}

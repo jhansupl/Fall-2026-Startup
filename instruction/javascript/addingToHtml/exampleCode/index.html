@@ -1,0 +1,23 @@
+<html>
+  <!-- external script -->
+  <head>
+    <script src="index.js"></script>
+  </head>
+  <body>
+    <button onclick="sayHello()">Say Hello</button>
+    <button onclick="sayGoodbye()">Say Goodbye</button>
+
+    <!-- internal script block -->
+    <script>
+      function sayGoodbye() {
+        alert("Goodbye");
+      }
+    </script>
+
+    <!-- inline attribute handler -->
+    <script>
+      let i = 1;
+    </script>
+    <button onclick="alert(`i = ${i++}`)">counter</button>
+  </body>
+</html>

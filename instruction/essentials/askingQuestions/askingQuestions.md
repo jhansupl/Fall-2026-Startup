@@ -1,0 +1,54 @@
+# Asking questions
+
+🔑 **Required reading**: [Stack Overflow - How to ask a good question](https://stackoverflow.com/help/how-to-ask)
+
+## Getting help
+
+- [Discord](https://discord.com) ([Invite](https://discord.gg/d6Q5RsxHXz))
+- [TA Office](https://docs.google.com/spreadsheets/d/1g1AMtgvyfSwMgp85QcwHuy0mVR-nN3bIGI6XNEJWB1U) (1156 TMCB)
+- [Dr. Clement](https://cs.byu.edu/department/directories/faculty-directory/mark-clement/)
+- [John Christiansen](https://discord.com)
+<!--
+- [Dr. Ventura](https://cs.byu.edu/department/directories/faculty-directory/dan-ventura/)
+- [Dr. Clement](https://cs.byu.edu/department/directories/faculty-directory/mark-clement/)
+- [Professor Jensen](https://cs.byu.edu/department/directories/faculty-directory/lee-jensen/) - Office hours through [Calendly](https://calendly.com/lee-cs/30min)
+  -->
+
+| Who        | How                 | Where                  | When                            |
+| ---------- | ------------------- | ---------------------- | ------------------------------- |
+| TA         | Online or in person | Discord, TA Office     | [TA Schedule](https://docs.google.com/spreadsheets/d/1g1AMtgvyfSwMgp85QcwHuy0mVR-nN3bIGI6XNEJWB1U/edit?gid=0#gid=0)|
+| Instructor | Online or in person | Discord, Class, Office | Office Hours, Class Times       |
+| Peers      | Online or in person | Discord, Class         | Depends on how friendly you are |
+
+## How to ask questions
+
+If you would like to get some help from others, please make sure that you have done the following first:
+
+- Have read deliverable specifications thoroughly. Sometimes this means 3 – 4 times.
+- Work at solving the problem on your own for at least 30 minutes.
+- Use unit tests to help you debug your problems.
+- Read the course instructional content before asking questions.
+- Try consulting the API documentation first.
+- Debug your code using the IDE.
+- Write, run, and be able to justify the effectiveness of your own test cases.
+- Attend every class.
+- Have a well-formed question to ask the TA.
+- Put yourself in a frame of mind to accept new ideas.
+- Remember one purpose of this class is for you to learn how to learn. If the TA feels you are not putting forth your full, they may ask you to return later when you have fulfilled these requirements.
+
+Remember that TAs are _assistants_. They are more than willing to assist you as you learn, but you need to do your part as well. Because of this, the help queue has a limit of 3 sessions per day per student. Exceptions are made for when you are attempting to pass off a deliverable.
+
+
+
+```masteryls
+{"id":"9f35a1b4-8968-4829-b951-bd7a1ad2ee08", "title":"Getting help", "type":"multiple-choice" }
+When I need help during this course:
+
+- [x] I know where to go and how to prepare to be successful
+- [ ] I still am unclear about what I should do
+```
+
+
+## Pay it forward
+
+Always remember how it felt to receive help. Actively look for opportunities to help others in a kind respectful way. After all, that is the Gospel of Jesus Christ at its core. We are a team. We are better together.

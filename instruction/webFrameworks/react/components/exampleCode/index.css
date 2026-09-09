@@ -1,0 +1,18 @@
+.app {
+  font-family: sans-serif;
+}
+
+.app-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ddd;
+}
+
+.app-bar div {
+  padding: 0.25em;
+}
+
+.content {
+  margin: 1em;
+}

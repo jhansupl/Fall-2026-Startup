@@ -1,0 +1,20 @@
+# login
+
+Example of providing authentication using React and Node.js. HTTP cookies are used for authentication tokens. Register, login, logout, and secure endpoints are demonstrated.
+
+To use the example you must already have Node.js installed.
+
+1. Clone this repository to your development environment.
+1. Open a console window and execute the following:
+   ```sh
+   (cd service && npm install)
+   npm install
+   ```
+1. Start the backend in VS Code
+   1. Open the project in VS Code
+   1. Open the `service/service.js` file.
+   1. Press `F5` to start debugging. Choose Node.js as the debugging target.
+1. Start the frontend running from a console window
+   1. Change directory into the project root.
+   1. Run `npm run dev`.
+1. Open a web browser window to [http://localhost:5173](http://localhost:5173).
