@@ -53,3 +53,11 @@ For this deliverable I did the following:
 - [x] Description of key features
 - [x] Description of how I will use each technology
 - [x] One or more rough sketches of my application (embedded above using Markdown image references)
+
+## AWS Deliverable
+
+For this deliverable I did the following:
+
+- [x] Rented an EC2 server from AWS (t3.micro instance, public IP `3.93.175.129`) and confirmed it's accessible over HTTP by opening the security group's inbound rules to allow ports 80 and 443 (only SSH/22 was open by default)
+- [ ] Lease a domain name in Route53 and associate it with my server
+- [ ] Configure my Caddyfile so the server is reachable over HTTPS at my hostname
