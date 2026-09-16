@@ -76,3 +76,5 @@ For this deliverable I did the following:
 - [x] Database data placeholder: full high-scores table on `scores.html`, with a shorter teaser table on `index.html`
 - [x] WebSocket data placeholder: "Live Rankings" list on `race.html`, labeled as realtime racer position data
 - [x] My name and a link to this GitHub repository are displayed on the home page and in the footer of every page
+- [x] Prerequisite: reviewed and deployed Simon HTML to `https://simon.jonaslee.com` (required fixing my Caddyfile, which had no route for that subdomain — see notes.md)
+- [x] Deployed this project to my production environment with `deployFiles.sh -s startup`, available at `https://startup.jonaslee.com`
