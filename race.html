@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Maze Racer - Race</title>
+</head>
+
+<body>
+  <header>
+    <h1>Maze Racer</h1>
+    <nav>
+      <menu>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="login.html">Login</a></li>
+        <li><a href="race.html">Race</a></li>
+        <li><a href="scores.html">High Scores</a></li>
+        <li><a href="about.html">About</a></li>
+      </menu>
+    </nav>
+  </header>
+
+  <main>
+    <section>
+      <h2>Today's Maze</h2>
+      <p>Time: <strong>0:27</strong></p>
+
+      <svg width="300" height="300" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+        <rect x="0" y="0" width="300" height="300" fill="none" stroke="black" stroke-width="4" />
+
+        <line x1="50" y1="0" x2="50" y2="100" stroke="black" stroke-width="4" />
+        <line x1="100" y1="50" x2="100" y2="150" stroke="black" stroke-width="4" />
+        <line x1="0" y1="150" x2="100" y2="150" stroke="black" stroke-width="4" />
+        <line x1="150" y1="0" x2="150" y2="200" stroke="black" stroke-width="4" />
+        <line x1="150" y1="200" x2="250" y2="200" stroke="black" stroke-width="4" />
+        <line x1="200" y1="50" x2="300" y2="50" stroke="black" stroke-width="4" />
+        <line x1="200" y1="100" x2="200" y2="250" stroke="black" stroke-width="4" />
+        <line x1="100" y1="250" x2="250" y2="250" stroke="black" stroke-width="4" />
+        <line x1="50" y1="200" x2="50" y2="300" stroke="black" stroke-width="4" />
+        <line x1="250" y1="100" x2="300" y2="100" stroke="black" stroke-width="4" />
+
+        <circle cx="25" cy="25" r="8" fill="dodgerblue" />
+        <text x="15" y="10" font-size="10">you</text>
+
+        <rect x="262" y="262" width="26" height="26" fill="mediumseagreen" />
+        <text x="255" y="255" font-size="10">exit</text>
+      </svg>
+
+      <p>A random inspirational quote will render here to keep you motivated mid-maze:</p>
+      <blockquote>"The only way out is through." &mdash; placeholder quote</blockquote>
+    </section>
+
+    <section>
+      <h2>Live Rankings</h2>
+      <p>This list updates in real time over a WebSocket connection as other racers move through the maze.</p>
+      <ol>
+        <li>wallCrawler &mdash; 78% through the maze</li>
+        <li>you &mdash; 52% through the maze</li>
+        <li>racer123 &mdash; 30% through the maze</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>Race Complete</h2>
+      <p>Placeholder for what displays once you reach the exit.</p>
+      <p>Your time: <strong>1:14</strong></p>
+      <p>As a reward, a joke fetched from the icanhazdadjoke.com API will show up here:</p>
+      <blockquote>A joke from icanhazdadjoke.com will appear here after you finish the race.</blockquote>
+    </section>
+  </main>
+
+  <footer>
+    <p>Maze Racer &copy; 2026 Jonas Lee</p>
+    <p><a href="https://github.com/jhansupl/Fall-2026-Startup">github.com/jhansupl/Fall-2026-Startup</a></p>
+  </footer>
+</body>
+
+</html>
