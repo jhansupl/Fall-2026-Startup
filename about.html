@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Maze Racer - About</title>
+</head>
+
+<body>
+  <header>
+    <h1>Maze Racer</h1>
+    <nav>
+      <menu>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="login.html">Login</a></li>
+        <li><a href="race.html">Race</a></li>
+        <li><a href="scores.html">High Scores</a></li>
+        <li><a href="about.html">About</a></li>
+      </menu>
+    </nav>
+  </header>
+
+  <main>
+    <section>
+      <h2>About Maze Racer</h2>
+      <p>
+        Ever crushed a word puzzle before your coffee finished brewing and wanted a race with more bite? Maze
+        Racer drops you and your friends into the exact same procedurally generated maze at the exact same
+        instant &mdash; first one to the exit wins, and you can watch everyone else's marker scrambling through
+        the walls in real time. No two mazes repeat, so there's always a new one to beat, and a persistent
+        leaderboard keeps score of who's actually the fastest in the group.
+      </p>
+    </section>
+
+    <section>
+      <h2>Key Features</h2>
+      <ul>
+        <li>Instant, procedurally generated maze (a new random layout every game, generated with a
+          recursive-backtracker algorithm)</li>
+        <li>Solve solo against the clock, or race friends on the identical maze at the same time</li>
+        <li>Live tracking of every racer's position and rank as they move through the maze</li>
+        <li>Secure account registration/login so scores are tied to a real player</li>
+        <li>Persistent leaderboard of best solve times</li>
+        <li>A small reward (a joke fetched from a public API) shown after finishing a race</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Technology</h2>
+      <ul>
+        <li><strong>HTML</strong> &mdash; structural pages for login/registration, the home/lobby screen, and
+          the maze race screen</li>
+        <li><strong>CSS</strong> &mdash; grid-based layout for the maze walls and responsive lobby/race screens
+        </li>
+        <li><strong>React</strong> &mdash; login form, maze grid, live rankings sidebar, and leaderboard
+          components, with React Router switching between screens</li>
+        <li><strong>Service</strong> &mdash; Node/Express endpoints for register, login, logout, generating a
+          maze, saving race times, fetching the leaderboard, and calling icanhazdadjoke.com</li>
+        <li><strong>DB</strong> &mdash; MongoDB storing user accounts, maze seeds, and race results</li>
+        <li><strong>WebSocket</strong> &mdash; broadcasts each racer's live position to everyone else in the
+          race</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>About the Developer</h2>
+      <p>Built by Jonas Lee for BYU CS 260.</p>
+      <p><a href="https://github.com/jhansupl/Fall-2026-Startup">github.com/jhansupl/Fall-2026-Startup</a></p>
+    </section>
+  </main>
+
+  <footer>
+    <p>Maze Racer &copy; 2026 Jonas Lee</p>
+    <p><a href="https://github.com/jhansupl/Fall-2026-Startup">github.com/jhansupl/Fall-2026-Startup</a></p>
+  </footer>
+</body>
+
+</html>
