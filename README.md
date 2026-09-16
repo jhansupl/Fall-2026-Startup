@@ -71,7 +71,7 @@ For this deliverable I did the following:
 - [x] Links between all pages via a shared nav menu
 - [x] Application textual content: elevator pitch and key features on `index.html`/`about.html`
 - [x] Placeholder for 3rd-party service call: the icanhazdadjoke.com reward shown in the "Race Complete" section of `race.html`
-- [x] Application images: maze preview screenshot on `index.html` (`readmeDesign/mazeRacerHome.png`)
+- [ ] Application images: currently represented only as inline SVG graphics (maze on `index.html`/`race.html`) &mdash; no raster image in the app yet, still deciding whether to add one
 - [x] Login placeholder, including user name display: `login.html` has login/register forms plus a separate "once you're signed in" block showing the username, stats, and a logout button
 - [x] Database data placeholder: full high-scores table on `scores.html`, with a shorter teaser table on `index.html`
 - [x] WebSocket data placeholder: "Live Rankings" list on `race.html`, labeled as realtime racer position data
