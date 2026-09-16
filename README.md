@@ -61,3 +61,18 @@ For this deliverable I did the following:
 - [x] Rented an EC2 server from AWS (t3.micro instance, public IP `3.93.175.129`) and confirmed it's accessible over HTTP by opening the security group's inbound rules to allow ports 80 and 443 (only SSH/22 was open by default)
 - [x] Leased a domain name (`jonaslee.com` via Namecheap) and pointed it at my server with an `A` record for the root domain and a wildcard `A` record (`*`) for subdomains, both resolving to `3.93.175.129`
 - [x] Configured my Caddyfile so the server is reachable over HTTPS at my hostname — Caddy automatically obtained Let's Encrypt certificates for `www.jonaslee.com` and `startup.jonaslee.com`. Verified `https://jonaslee.com`, `https://www.jonaslee.com`, and `https://startup.jonaslee.com` all return the default page over HTTPS.
+
+## Startup HTML Deliverable
+
+For this deliverable I did the following:
+
+- [x] HTML pages for each component of my application: `index.html` (home/lobby), `login.html` (login/register), `race.html` (live race), `scores.html` (high scores), `about.html` (about)
+- [x] Proper use of `header`, `nav`, `main`, and `footer` on every page
+- [x] Links between all pages via a shared nav menu
+- [x] Application textual content: elevator pitch and key features on `index.html`/`about.html`
+- [x] Placeholder for 3rd-party service call: the icanhazdadjoke.com reward shown in the "Race Complete" section of `race.html`
+- [x] Application images: maze preview screenshot on `index.html` (`readmeDesign/mazeRacerHome.png`)
+- [x] Login placeholder, including user name display: `login.html` has login/register forms plus a separate "once you're signed in" block showing the username, stats, and a logout button
+- [x] Database data placeholder: full high-scores table on `scores.html`, with a shorter teaser table on `index.html`
+- [x] WebSocket data placeholder: "Live Rankings" list on `race.html`, labeled as realtime racer position data
+- [x] My name and a link to this GitHub repository are displayed on the home page and in the footer of every page
