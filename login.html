@@ -11,13 +11,13 @@
   <header>
     <h1>Maze Racer</h1>
     <nav>
-      <menu>
+      <ul>
         <li><a href="index.html">Home</a></li>
         <li><a href="login.html">Login</a></li>
         <li><a href="race.html">Race</a></li>
         <li><a href="scores.html">High Scores</a></li>
         <li><a href="about.html">About</a></li>
-      </menu>
+      </ul>
     </nav>
   </header>
 
@@ -26,10 +26,10 @@
       <h2>Login</h2>
       <form action="#" method="post">
         <label for="loginUsername">Username</label>
-        <input type="text" id="loginUsername" name="username" placeholder="racer123" required />
+        <input type="text" id="loginUsername" name="username" placeholder="racer123" autocomplete="username" required />
 
         <label for="loginPassword">Password</label>
-        <input type="password" id="loginPassword" name="password" required />
+        <input type="password" id="loginPassword" name="password" autocomplete="current-password" required />
 
         <button type="submit">Sign In</button>
       </form>
@@ -39,16 +39,16 @@
       <h2>Create an account</h2>
       <form action="#" method="post">
         <label for="registerUsername">Username</label>
-        <input type="text" id="registerUsername" name="username" placeholder="racer123" required />
+        <input type="text" id="registerUsername" name="username" placeholder="racer123" autocomplete="username" required />
 
         <label for="registerEmail">Email</label>
-        <input type="email" id="registerEmail" name="email" placeholder="you@example.com" required />
+        <input type="email" id="registerEmail" name="email" placeholder="you@example.com" autocomplete="email" required />
 
         <label for="registerPassword">Password</label>
-        <input type="password" id="registerPassword" name="password" required />
+        <input type="password" id="registerPassword" name="password" autocomplete="new-password" required />
 
         <label for="registerConfirm">Confirm password</label>
-        <input type="password" id="registerConfirm" name="confirm" required />
+        <input type="password" id="registerConfirm" name="confirm" autocomplete="new-password" required />
 
         <button type="submit">Create Account</button>
       </form>
