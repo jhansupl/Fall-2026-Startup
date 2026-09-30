@@ -66,7 +66,8 @@ main section {
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
 }
 
-.maze-preview {
+.maze-preview,
+.maze-svg {
   display: block;
   margin: 1rem auto;
   border: 2px solid #2b2d5c;
