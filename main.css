@@ -93,6 +93,31 @@ tbody tr:nth-child(even) {
   background-color: #eef0fa;
 }
 
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  max-width: 320px;
+}
+
+label {
+  font-weight: 600;
+  margin-top: 0.75rem;
+}
+
+input {
+  padding: 0.5rem;
+  border: 1px solid #c7c7d6;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-family: inherit;
+}
+
+input:focus {
+  outline: 2px solid #2b2d5c;
+  outline-offset: 1px;
+}
+
 footer {
   text-align: center;
   padding: 1.5rem;
