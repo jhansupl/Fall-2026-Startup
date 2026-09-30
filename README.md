@@ -78,3 +78,16 @@ For this deliverable I did the following:
 - [x] My name and a link to this GitHub repository are displayed on the home page and in the footer of every page
 - [x] Prerequisite: reviewed and deployed Simon HTML to `https://simon.jonaslee.com` (required fixing my Caddyfile, which had no route for that subdomain — see notes.md)
 - [x] Deployed this project to my production environment with `deployFiles.sh -s startup`, available at `https://startup.jonaslee.com`
+
+## Startup CSS Deliverable
+
+For this deliverable I did the following:
+
+- [x] Prerequisite: reviewed and deployed Simon CSS to `https://simon.jonaslee.com`
+- [x] Visually appealing colors and layout, no overflowing elements: a consistent color palette (dark indigo header/accents, light card backgrounds) applied across all 5 pages, with content grouped into card sections so nothing runs edge-to-edge or overflows its container
+- [x] Use of a CSS framework: Bootstrap, loaded via CDN on every page, and actually used for the login/register layout on `login.html` (`row`/`col-md-6` grid, stacking on narrow screens)
+- [x] All visual elements styled using CSS: header/nav, card sections, forms/inputs/buttons, tables (dark header + zebra-striped rows), the maze image/SVG, the live rankings list, the reward blockquote, and the Key Features/Technology lists
+- [x] Responsive to window resizing using flexbox and/or grid: flexbox for the header/nav and form layout, Bootstrap's grid for the login/register columns, and a media query that stacks the header on narrow screens
+- [x] Use of an imported font: Google Fonts' Rubik, imported in `main.css` and applied to the whole page
+- [x] Use of different selector types: element (`body`, `nav`, `table`, `button`, ...), class (`.card-section`, `.maze-preview`, `.info-list`, ...), ID (`#loggedInUser`), and pseudo selectors (`:hover`, `:focus`, `:nth-child(even)`, `:last-child`)
+- [x] Deployed this project to my production environment with `deployFiles.sh -s startup`, available at `https://startup.jonaslee.com`
