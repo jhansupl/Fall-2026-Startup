@@ -91,3 +91,16 @@ For this deliverable I did the following:
 - [x] Use of an imported font: Google Fonts' Rubik, imported in `main.css` and applied to the whole page
 - [x] Use of different selector types: element (`body`, `nav`, `table`, `button`, ...), class (`.card-section`, `.maze-preview`, `.info-list`, ...), ID (`#loggedInUser`), and pseudo selectors (`:hover`, `:focus`, `:nth-child(even)`, `:last-child`)
 - [x] Deployed this project to my production environment with `deployFiles.sh -s startup`, available at `https://startup.jonaslee.com`
+
+## Startup React Phase 1: Routing Deliverable
+
+For this deliverable I did the following:
+
+- [x] Prerequisite: ported Simon CSS to Simon React (Vite + React Router, one component per page) and deployed it to `https://simon.jonaslee.com` with `deployReact.sh`
+- [x] A link to this GitHub repository is displayed in the footer of every page and on the About page
+- [x] Bundled using Vite: `package.json` has `dev`/`build`/`preview` scripts, `index.html` + `index.jsx` are the Vite entry point, and `npm run build` outputs the production bundle to `dist/`
+- [x] Multiple React components containing my HTML and CSS: `src/home/home.jsx`, `src/login/login.jsx`, `src/race/race.jsx`, `src/scores/scores.jsx`, `src/about/about.jsx`, plus `src/app.jsx` for the shared header/nav/footer. The CSS from the previous phase lives unchanged in `src/app.css`, and Bootstrap is now installed from npm instead of a CDN link
+- [x] React router: `BrowserRouter` with `NavLink` navigation and routes for `/`, `/login`, `/race`, `/scores`, `/about`, and a 404 fallback
+- [x] Static pages (`login.html`, `race.html`, `scores.html`, `about.html`) were removed once each had a matching component. The scores table is rendered from an array instead of copy-pasted rows
+- [x] No reactivity yet, as intended for this phase. The only behavior is that the login forms call `preventDefault` so submitting doesn't reload the page
+- [x] Replaced `deployFiles.sh` with `deployReact.sh`, available at `https://startup.jonaslee.com`

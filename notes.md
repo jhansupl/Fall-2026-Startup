@@ -20,3 +20,13 @@ I love web programming.
 - Always use absolute paths in the Caddyfile `root` directive, not relative ones — Caddy's systemd service has no working directory set, so a relative path resolves against `/`, not the ubuntu home directory.
 - `deployFiles.sh` does `scp -r *` from wherever you run it — since my repo root also has the full course `instruction/` folder (63MB) alongside my own app files, running the script straight from the repo root would've uploaded the entire course website to production. Deployed from a clean staging folder containing only my 5 HTML pages + the one image they reference instead.
 - First SSH connection to a fresh host from a new machine fails with "Host key verification failed" until you `ssh-keyscan -H <host> >> ~/.ssh/known_hosts` once.
+
+## React P1: Routing
+
+- Vite expects `index.html` at the project root with a `<div id="root">` and a module script; the old per-page HTML files all collapse into components rendered by the router. Static assets that are referenced by absolute URL (`/images/...`) live in `public/`.
+- React uses `className` and `htmlFor` instead of `class` and `for`, camelCase SVG attributes (`strokeWidth`, `fontSize`), and `autoComplete`. Missing any of these fails silently or just warns in the console.
+- `NavLink` on `/` needs the `end` prop, otherwise Home is highlighted as active on every route.
+- The header and footer that I had to copy onto every HTML page now live once in `App`, wrapped around `<Routes>`.
+- `BrowserRouter` only works for in-app navigation on a plain static file server. Typing `/login` straight into the address bar or refreshing there asks the server for a `login` file that doesn't exist and returns 404, so Caddy needs a `try_files {path} /index.html` fallback for the site.
+- `package-lock.json` is in `.gitignore`, so `npm install` on the server resolves versions fresh each deploy.
+- `deployReact.sh` runs `npm install` and `npm run build` locally, then copies only `build/*` to the server. I still deployed from a staged copy that holds only the app files, to keep the course material away from the deploy script.
