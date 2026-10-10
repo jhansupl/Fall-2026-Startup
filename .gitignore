@@ -3,5 +3,6 @@
 .vscode
 package-lock.json
 dbConfig.json
-coveragedist
+coverage
+dist
 build
