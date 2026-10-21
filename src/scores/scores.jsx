@@ -1,7 +1,7 @@
 import React from 'react';
 
 // Seed data used until a database exists; the first visit copies it into localStorage.
-const defaultScores = [
+export const defaultScores = [
   ['mazeMaster', '0:42', '2026-09-10'],
   ['racer123', '0:51', '2026-09-11'],
   ['wallCrawler', '1:03', '2026-09-12'],

@@ -1,4 +1,5 @@
 import React from 'react';
+import { defaultScores } from '../scores/scores';
 
 const CELL = 50;
 const SIZE = 6;
@@ -32,6 +33,11 @@ function isBlocked(col, row, dx, dy) {
   });
 }
 
+function toSeconds(time) {
+  const [m, sec] = time.split(':').map(Number);
+  return m * 60 + sec;
+}
+
 function formatTime(total) {
   const m = Math.floor(total / 60);
   const sec = String(total % 60).padStart(2, '0');
@@ -42,11 +48,23 @@ export function Race() {
   const [seconds, setSeconds] = React.useState(0);
   const [pos, setPos] = React.useState({ col: 0, row: 0 });
 
-  // Tick once a second; the cleanup stops the timer when leaving the page.
+  const finished = pos.col === SIZE - 1 && pos.row === SIZE - 1;
+
+  // Tick once a second until the exit is reached; the cleanup also stops it when leaving the page.
   React.useEffect(() => {
+    if (finished) return;
     const id = setInterval(() => setSeconds((s) => s + 1), 1000);
     return () => clearInterval(id);
-  }, []);
+  }, [finished]);
+
+  // Mock for the later scores service: add this run to the saved list, fastest first.
+  React.useEffect(() => {
+    if (!finished) return;
+    const saved = JSON.parse(localStorage.getItem('scores') || 'null') || defaultScores;
+    const entry = [localStorage.getItem('userName') || 'Guest', formatTime(seconds), new Date().toISOString().slice(0, 10)];
+    const updated = [...saved, entry].sort((a, b) => toSeconds(a[1]) - toSeconds(b[1]));
+    localStorage.setItem('scores', JSON.stringify(updated));
+  }, [finished]);
 
   // Arrow keys move the marker one cell unless a wall is in the way.
   React.useEffect(() => {
@@ -91,15 +109,17 @@ export function Race() {
         </ol>
       </section>
 
-      <section className='card-section'>
-        <h2>Race Complete</h2>
-        <p>Your time: <strong>1:14</strong></p>
-        <p>
-          Your reward, fetched live from the{' '}
-          <a href='https://icanhazdadjoke.com/api' target='_blank' rel='noopener noreferrer'>icanhazdadjoke.com</a> API:
-        </p>
-        <blockquote>"Why don't scientists trust atoms? Because they make up everything!"</blockquote>
-      </section>
+      {finished && (
+        <section className='card-section'>
+          <h2>Race Complete</h2>
+          <p>Your time: <strong>{formatTime(seconds)}</strong></p>
+          <p>
+            Your reward, fetched live from the{' '}
+            <a href='https://icanhazdadjoke.com/api' target='_blank' rel='noopener noreferrer'>icanhazdadjoke.com</a> API:
+          </p>
+          <blockquote>"Why don't scientists trust atoms? Because they make up everything!"</blockquote>
+        </section>
+      )}
     </main>
   );
 }
