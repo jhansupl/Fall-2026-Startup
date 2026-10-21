@@ -3,6 +3,11 @@ import React from 'react';
 export function Login() {
   const [loginName, setLoginName] = React.useState('');
   const [loginPassword, setLoginPassword] = React.useState('');
+  const [regName, setRegName] = React.useState('');
+  const [regEmail, setRegEmail] = React.useState('');
+  const [regPassword, setRegPassword] = React.useState('');
+  const [regConfirm, setRegConfirm] = React.useState('');
+  const [regError, setRegError] = React.useState('');
   const [userName, setUserName] = React.useState(localStorage.getItem('userName') || '');
 
   // Mock for the later login service: remember the user in this browser only.
@@ -14,8 +19,20 @@ export function Login() {
     setLoginPassword('');
   }
 
-  // Stub for this phase: the forms render but do not submit anywhere yet.
-  const noSubmit = (e) => e.preventDefault();
+  function register(e) {
+    e.preventDefault();
+    if (regPassword !== regConfirm) {
+      setRegError('Passwords do not match.');
+      return;
+    }
+    localStorage.setItem('userName', regName);
+    setUserName(regName);
+    setRegName('');
+    setRegEmail('');
+    setRegPassword('');
+    setRegConfirm('');
+    setRegError('');
+  }
 
   function logout() {
     localStorage.removeItem('userName');
@@ -40,19 +57,20 @@ export function Login() {
 
         <section className='card-section col-md-6'>
           <h2>Create an account</h2>
-          <form onSubmit={noSubmit}>
+          <form onSubmit={register}>
             <label htmlFor='registerUsername'>Username</label>
-            <input type='text' id='registerUsername' name='username' placeholder='racer123' autoComplete='username' required />
+            <input type='text' id='registerUsername' name='username' placeholder='racer123' autoComplete='username' value={regName} onChange={(e) => setRegName(e.target.value)} required />
 
             <label htmlFor='registerEmail'>Email</label>
-            <input type='email' id='registerEmail' name='email' placeholder='you@example.com' autoComplete='email' required />
+            <input type='email' id='registerEmail' name='email' placeholder='you@example.com' autoComplete='email' value={regEmail} onChange={(e) => setRegEmail(e.target.value)} required />
 
             <label htmlFor='registerPassword'>Password</label>
-            <input type='password' id='registerPassword' name='password' autoComplete='new-password' required />
+            <input type='password' id='registerPassword' name='password' autoComplete='new-password' value={regPassword} onChange={(e) => setRegPassword(e.target.value)} required />
 
             <label htmlFor='registerConfirm'>Confirm password</label>
-            <input type='password' id='registerConfirm' name='confirm' autoComplete='new-password' required />
+            <input type='password' id='registerConfirm' name='confirm' autoComplete='new-password' value={regConfirm} onChange={(e) => setRegConfirm(e.target.value)} required />
 
+            {regError && <p role='alert'>{regError}</p>}
             <button type='submit'>Create Account</button>
           </form>
         </section>
