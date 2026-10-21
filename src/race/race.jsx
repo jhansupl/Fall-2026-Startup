@@ -1,11 +1,25 @@
 import React from 'react';
 
+function formatTime(total) {
+  const m = Math.floor(total / 60);
+  const sec = String(total % 60).padStart(2, '0');
+  return `${m}:${sec}`;
+}
+
 export function Race() {
+  const [seconds, setSeconds] = React.useState(0);
+
+  // Tick once a second; the cleanup stops the timer when leaving the page.
+  React.useEffect(() => {
+    const id = setInterval(() => setSeconds((s) => s + 1), 1000);
+    return () => clearInterval(id);
+  }, []);
+
   return (
     <main>
       <section className='card-section'>
         <h2>Today's Maze</h2>
-        <p>Time: <strong>0:27</strong></p>
+        <p>Time: <strong>{formatTime(seconds)}</strong></p>
 
         <svg width='300' height='300' viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg' className='maze-svg'>
           <rect x='0' y='0' width='300' height='300' fill='none' stroke='black' strokeWidth='4' />
