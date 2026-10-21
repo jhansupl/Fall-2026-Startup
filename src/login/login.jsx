@@ -17,6 +17,11 @@ export function Login() {
   // Stub for this phase: the forms render but do not submit anywhere yet.
   const noSubmit = (e) => e.preventDefault();
 
+  function logout() {
+    localStorage.removeItem('userName');
+    setUserName('');
+  }
+
   return (
     <main>
       <div className='row g-4'>
@@ -58,7 +63,7 @@ export function Login() {
           <h2>Welcome Back</h2>
           <p>Welcome back, <strong>{userName}</strong>!</p>
           <p>Best time: 0:51 &middot; Races won: 3</p>
-          <button type='button'>Logout</button>
+          <button type='button' onClick={logout}>Logout</button>
         </section>
       )}
     </main>
