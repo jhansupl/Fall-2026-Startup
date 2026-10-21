@@ -1,6 +1,9 @@
 import React from 'react';
 
 export function Login() {
+  const [loginName, setLoginName] = React.useState('');
+  const [loginPassword, setLoginPassword] = React.useState('');
+
   // Stub for this phase: the forms render but do not submit anywhere yet.
   const noSubmit = (e) => e.preventDefault();
 
@@ -11,10 +14,10 @@ export function Login() {
           <h2>Login</h2>
           <form onSubmit={noSubmit}>
             <label htmlFor='loginUsername'>Username</label>
-            <input type='text' id='loginUsername' name='username' placeholder='racer123' autoComplete='username' required />
+            <input type='text' id='loginUsername' name='username' placeholder='racer123' autoComplete='username' value={loginName} onChange={(e) => setLoginName(e.target.value)} required />
 
             <label htmlFor='loginPassword'>Password</label>
-            <input type='password' id='loginPassword' name='password' autoComplete='current-password' required />
+            <input type='password' id='loginPassword' name='password' autoComplete='current-password' value={loginPassword} onChange={(e) => setLoginPassword(e.target.value)} required />
 
             <button type='submit'>Sign In</button>
           </form>
