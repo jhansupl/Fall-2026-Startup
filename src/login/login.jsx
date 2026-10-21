@@ -3,6 +3,16 @@ import React from 'react';
 export function Login() {
   const [loginName, setLoginName] = React.useState('');
   const [loginPassword, setLoginPassword] = React.useState('');
+  const [userName, setUserName] = React.useState(localStorage.getItem('userName') || '');
+
+  // Mock for the later login service: remember the user in this browser only.
+  function signIn(e) {
+    e.preventDefault();
+    localStorage.setItem('userName', loginName);
+    setUserName(loginName);
+    setLoginName('');
+    setLoginPassword('');
+  }
 
   // Stub for this phase: the forms render but do not submit anywhere yet.
   const noSubmit = (e) => e.preventDefault();
@@ -12,7 +22,7 @@ export function Login() {
       <div className='row g-4'>
         <section className='card-section col-md-6'>
           <h2>Login</h2>
-          <form onSubmit={noSubmit}>
+          <form onSubmit={signIn}>
             <label htmlFor='loginUsername'>Username</label>
             <input type='text' id='loginUsername' name='username' placeholder='racer123' autoComplete='username' value={loginName} onChange={(e) => setLoginName(e.target.value)} required />
 
@@ -43,12 +53,14 @@ export function Login() {
         </section>
       </div>
 
-      <section className='card-section'>
-        <h2>Welcome Back</h2>
-        <p>Welcome back, <strong>mazeMaster</strong>!</p>
-        <p>Best time: 0:51 &middot; Races won: 3</p>
-        <button type='button'>Logout</button>
-      </section>
+      {userName && (
+        <section className='card-section'>
+          <h2>Welcome Back</h2>
+          <p>Welcome back, <strong>{userName}</strong>!</p>
+          <p>Best time: 0:51 &middot; Races won: 3</p>
+          <button type='button'>Logout</button>
+        </section>
+      )}
     </main>
   );
 }
