@@ -1,6 +1,7 @@
 import React from 'react';
 
-const scores = [
+// Seed data used until a database exists; the first visit copies it into localStorage.
+const defaultScores = [
   ['mazeMaster', '0:42', '2026-09-10'],
   ['racer123', '0:51', '2026-09-11'],
   ['wallCrawler', '1:03', '2026-09-12'],
@@ -12,6 +13,18 @@ const scores = [
 ];
 
 export function Scores() {
+  const [scores, setScores] = React.useState([]);
+
+  React.useEffect(() => {
+    const saved = localStorage.getItem('scores');
+    if (saved) {
+      setScores(JSON.parse(saved));
+    } else {
+      localStorage.setItem('scores', JSON.stringify(defaultScores));
+      setScores(defaultScores);
+    }
+  }, []);
+
   return (
     <main>
       <section className='card-section'>
