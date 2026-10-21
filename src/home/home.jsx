@@ -2,6 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 export function Home() {
+  const [userName, setUserName] = React.useState('Guest');
+
+  // Read the mock login on mount; this becomes a service call later.
+  React.useEffect(() => {
+    setUserName(localStorage.getItem('userName') || 'Guest');
+  }, []);
+
   return (
     <main>
       <section className='card-section'>
@@ -15,7 +22,7 @@ export function Home() {
 
       <section className='card-section'>
         <h2>Status</h2>
-        <p>Logged in as: <strong id='loggedInUser'>Guest</strong></p>
+        <p>Logged in as: <strong id='loggedInUser'>{userName}</strong></p>
         <p><Link to='/login'>Login or create an account</Link></p>
       </section>
 
