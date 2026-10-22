@@ -98,7 +98,10 @@ export function Race() {
       const move = moves[e.key];
       if (!move) return;
       e.preventDefault();
-      setPos((p) => (isBlocked(p.col, p.row, move[0], move[1]) ? p : { col: p.col + move[0], row: p.row + move[1] }));
+      setPos((p) => {
+        if (p.col === SIZE - 1 && p.row === SIZE - 1) return p;
+        return isBlocked(p.col, p.row, move[0], move[1]) ? p : { col: p.col + move[0], row: p.row + move[1] };
+      });
     }
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);

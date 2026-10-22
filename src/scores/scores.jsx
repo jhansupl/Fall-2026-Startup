@@ -43,7 +43,7 @@ export function Scores() {
           </thead>
           <tbody>
             {scores.map(([name, time, date], i) => (
-              <tr key={name}>
+              <tr key={`${name}-${date}-${i}`}>
                 <td>{i + 1}</td>
                 <td>{name}</td>
                 <td>{time}</td>
