@@ -52,6 +52,7 @@ export function Race() {
     { name: 'wallCrawler', pct: 0 },
     { name: 'racer123', pct: 0 },
   ]);
+  const [joke, setJoke] = React.useState('');
   const finished = pos.col === SIZE - 1 && pos.row === SIZE - 1;
 
   // Tick once a second until the exit is reached; the cleanup also stops it when leaving the page.
@@ -71,6 +72,15 @@ export function Race() {
 
   const yourPct = Math.round(((pos.col + pos.row) / (2 * (SIZE - 1))) * 100);
   const rankings = [...opponents, { name: 'you', pct: yourPct }].sort((a, b) => b.pct - a.pct);
+
+  // Real third-party call: fetch the reward joke once the race is finished.
+  React.useEffect(() => {
+    if (!finished) return;
+    fetch('https://icanhazdadjoke.com/', { headers: { Accept: 'application/json' } })
+      .then((response) => response.json())
+      .then((data) => setJoke(data.joke))
+      .catch(() => setJoke("Why don't scientists trust atoms? Because they make up everything!"));
+  }, [finished]);
 
   // Mock for the later scores service: add this run to the saved list, fastest first.
   React.useEffect(() => {
@@ -132,7 +142,7 @@ export function Race() {
             Your reward, fetched live from the{' '}
             <a href='https://icanhazdadjoke.com/api' target='_blank' rel='noopener noreferrer'>icanhazdadjoke.com</a> API:
           </p>
-          <blockquote>"Why don't scientists trust atoms? Because they make up everything!"</blockquote>
+          <blockquote>{joke ? `"${joke}"` : 'Fetching your reward...'}</blockquote>
         </section>
       )}
     </main>
