@@ -48,6 +48,10 @@ export function Race() {
   const [seconds, setSeconds] = React.useState(0);
   const [pos, setPos] = React.useState({ col: 0, row: 0 });
 
+  const [opponents, setOpponents] = React.useState([
+    { name: 'wallCrawler', pct: 0 },
+    { name: 'racer123', pct: 0 },
+  ]);
   const finished = pos.col === SIZE - 1 && pos.row === SIZE - 1;
 
   // Tick once a second until the exit is reached; the cleanup also stops it when leaving the page.
@@ -56,6 +60,17 @@ export function Race() {
     const id = setInterval(() => setSeconds((s) => s + 1), 1000);
     return () => clearInterval(id);
   }, [finished]);
+
+  // Mock for the later WebSocket feed: opponents creep forward by a random amount each second.
+  React.useEffect(() => {
+    const id = setInterval(() => {
+      setOpponents((list) => list.map((o) => ({ ...o, pct: Math.min(100, o.pct + Math.floor(Math.random() * 7)) })));
+    }, 1000);
+    return () => clearInterval(id);
+  }, []);
+
+  const yourPct = Math.round(((pos.col + pos.row) / (2 * (SIZE - 1))) * 100);
+  const rankings = [...opponents, { name: 'you', pct: yourPct }].sort((a, b) => b.pct - a.pct);
 
   // Mock for the later scores service: add this run to the saved list, fastest first.
   React.useEffect(() => {
@@ -103,9 +118,9 @@ export function Race() {
       <section className='card-section'>
         <h2>Live Rankings</h2>
         <ol className='rankings-list'>
-          <li>wallCrawler &mdash; 78% through the maze</li>
-          <li>you &mdash; 52% through the maze</li>
-          <li>racer123 &mdash; 30% through the maze</li>
+          {rankings.map((r) => (
+            <li key={r.name}>{r.name} &mdash; {r.pct}% through the maze</li>
+          ))}
         </ol>
       </section>
 
