@@ -1,12 +1,20 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { defaultScores } from '../scores/scores';
 
 export function Home() {
   const [userName, setUserName] = React.useState('Guest');
+  const [topScores, setTopScores] = React.useState([]);
 
   // Read the mock login on mount; this becomes a service call later.
   React.useEffect(() => {
     setUserName(localStorage.getItem('userName') || 'Guest');
+    const saved = JSON.parse(localStorage.getItem('scores') || 'null') || defaultScores;
+    const toSeconds = (time) => {
+      const [minutes, seconds] = time.split(':').map(Number);
+      return minutes * 60 + seconds;
+    };
+    setTopScores([...saved].sort((a, b) => toSeconds(a[1]) - toSeconds(b[1])).slice(0, 3));
   }, []);
 
   return (
@@ -54,9 +62,9 @@ export function Home() {
             </tr>
           </thead>
           <tbody>
-            <tr><td>1</td><td>mazeMaster</td><td>0:42</td></tr>
-            <tr><td>2</td><td>racer123</td><td>0:51</td></tr>
-            <tr><td>3</td><td>wallCrawler</td><td>1:03</td></tr>
+            {topScores.map(([name, time], i) => (
+              <tr key={i}><td>{i + 1}</td><td>{name}</td><td>{time}</td></tr>
+            ))}
           </tbody>
         </table>
       </section>
