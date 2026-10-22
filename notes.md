@@ -30,3 +30,16 @@ I love web programming.
 - `BrowserRouter` only works for in-app navigation on a plain static file server. Typing `/login` straight into the address bar or refreshing there asks the server for a `login` file that doesn't exist and returns 404, so Caddy needs a `try_files {path} /index.html` fallback for the site.
 - `package-lock.json` is in `.gitignore`, so `npm install` on the server resolves versions fresh each deploy.
 - `deployReact.sh` runs `npm install` and `npm run build` locally, then copies only `build/*` to the server. I still deployed from a staged copy that holds only the app files, to keep the course material away from the deploy script.
+
+## React P2: Reactivity
+
+- Controlled inputs pair a `useState` value with an `onChange` handler. Form submit handlers prevent page reloads, and registration can show a password-confirmation error by changing state.
+- `localStorage` persists strings across reloads, so score arrays need `JSON.stringify` when saving and `JSON.parse` when loading. It does not trigger a React render; components load it into state when they mount.
+- Sort `m:ss` times by converting them to seconds. Sorting the strings would put `10:00` before `2:00`. Home sorts a copy and takes the first three rows, using the same default data as Scores and Race.
+- Timer effects return `clearInterval` cleanup, and the keyboard effect removes its event listener on unmount. Functional state updates such as `setSeconds(s => s + 1)` use the latest value rather than a stale closure.
+- The finish state controls the timer, score-saving effect, and reward request. Browser testing caught a bug where moving out of the exit and back saved a second score; refusing movement after finishing makes the finish state stable for that run.
+- A username is not a unique table-row key when one racer completes several runs. Score rows include the date and row index in their keys.
+- Simon React P2 demonstrates lifting authentication state to App, passing username/callback props to children, and simulating opponent messages through a game notifier. Maze Racer currently keeps browser-local identity and mocks the fixed maze and opponent progress until the backend milestones.
+- Build success does not prove interaction works. Browser checks must wait for effects to render, then exercise registration, movement, finish, persistence, navigation, and logout. The reward test intercepts the API with a known response so it is repeatable.
+- The live React P2 topic asks for the app URL in Canvas, while its embedded MasteryLS submission asks for the GitHub repository URL. Use the URL requested by the actual submission field.
+- Deployed Simon React P2 and Maze Racer from clean staging folders using `deployReact.sh`, after backing up both existing static sites. Production browser checks confirmed Simon login/game start and Maze Racer's registration-to-finish flow, saved leaderboards, reloads, and logout.

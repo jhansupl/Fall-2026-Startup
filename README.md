@@ -104,3 +104,16 @@ For this deliverable I did the following:
 - [x] Static pages (`login.html`, `race.html`, `scores.html`, `about.html`) were removed once each had a matching component. The scores table is rendered from an array instead of copy-pasted rows
 - [x] No reactivity yet, as intended for this phase. The only behavior is that the login forms call `preventDefault` so submitting doesn't reload the page
 - [x] Replaced `deployFiles.sh` with `deployReact.sh`, available at `https://startup.jonaslee.com`
+
+## React part 2: Reactivity
+
+- [x] **Multiple interactive React components (70%)**: Login uses controlled fields for sign-in and registration, checks matching passwords, remembers the username in `localStorage`, and supports logout. Home displays that username and the three fastest saved results. Scores loads saved results, seeding eight example rows on the first visit.
+- [x] Race supports arrow-key movement with wall collisions, a running timer, and a finish screen. Reaching the exit stops movement and the timer, saves one result with username/time/date, and sorts results fastest first. Leave and reopen Race to start another run.
+- [x] **`useState` and `useEffect` (30%)**: state drives forms, validation messages, usernames, leaderboard rows, player position, time, opponent rankings, and the finish-line joke. Effects load saved data, save completed races, fetch the reward, and install timers and keyboard listeners with cleanup.
+- [x] Mocked future services: `localStorage` stands in for login and database persistence; opponent percentages advance with `setInterval` instead of WebSocket messages. The fixed maze stands in for the future maze-generation endpoint. Login does not validate stored credentials; passwords are not persisted, and the displayed login statistics are sample values. Data is local to each browser.
+- [x] The finish screen requests a joke from the icanhazdadjoke API, with a hardcoded fallback on a failed request.
+- [x] My name and GitHub repository link remain in the shared footer, including on Home. Learning notes are in `notes.md`, and work is recorded in small commits.
+- [x] Reviewed and deployed the instructor's Simon React P2 implementation to [simon.jonaslee.com](https://simon.jonaslee.com), with login and game start verified in the browser.
+- [x] Deployed Maze Racer with `deployReact.sh -s startup` from a clean staging folder to [startup.jonaslee.com](https://startup.jonaslee.com).
+
+Verification: the production build passes. Browser checks passed locally and on production for registration and password mismatch, login state/logout, wall collisions, timer/finish behavior, one score per race, saved-score ordering, navigation and reloads, and reward rendering with a controlled API response. A separate browser request to the real joke API returned HTTP 200 and a joke.
