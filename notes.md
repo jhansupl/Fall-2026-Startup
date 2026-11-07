@@ -43,3 +43,12 @@ I love web programming.
 - Build success does not prove interaction works. Browser checks must wait for effects to render, then exercise registration, movement, finish, persistence, navigation, and logout. The reward test intercepts the API with a known response so it is repeatable.
 - The live React P2 topic asks for the app URL in Canvas, while its embedded MasteryLS submission asks for the GitHub repository URL. Use the URL requested by the actual submission field.
 - Deployed Simon React P2 and Maze Racer from clean staging folders using `deployReact.sh`, after backing up both existing static sites. Production browser checks confirmed Simon login/game start and Maze Racer's registration-to-finish flow, saved leaderboards, reloads, and logout.
+
+## Startup Service
+
+- Backend dependencies go in `service/package.json`, not the root one; mixing them causes 502s after deployment.
+- The Vite dev server forwards `/api` to port 4000 (`vite.config.js`), so the same `fetch('/api/...')` code works in development and production.
+- `deployService.sh` copies `service/*.js` and `service/*.json` next to the built `public` folder and runs `pm2 restart <service>`, so the pm2 process must already exist on the server.
+- The server's Caddyfile currently serves `startup.` and `simon.` as static files. To reach the Express service it must `reverse_proxy` to ports 4000 and 3000 instead.
+- Auth: hash with bcrypt, keep a random token on the user, and send it as an `httpOnly` cookie. Middleware checks the cookie before protected routes.
+- I tested the endpoints through the Vite proxy with curl before touching the UI.
