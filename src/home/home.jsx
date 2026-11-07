@@ -9,12 +9,10 @@ export function Home() {
   // Read the mock login on mount; this becomes a service call later.
   React.useEffect(() => {
     setUserName(localStorage.getItem('userName') || 'Guest');
-    const saved = JSON.parse(localStorage.getItem('scores') || 'null') || defaultScores;
-    const toSeconds = (time) => {
-      const [minutes, seconds] = time.split(':').map(Number);
-      return minutes * 60 + seconds;
-    };
-    setTopScores([...saved].sort((a, b) => toSeconds(a[1]) - toSeconds(b[1])).slice(0, 3));
+    fetch('/api/scores')
+      .then((res) => res.json())
+      .then((saved) => setTopScores(saved.slice(0, 3)))
+      .catch(() => setTopScores(defaultScores.slice(0, 3)));
   }, []);
 
   return (
