@@ -8,33 +8,55 @@ export function Login() {
   const [regPassword, setRegPassword] = React.useState('');
   const [regConfirm, setRegConfirm] = React.useState('');
   const [regError, setRegError] = React.useState('');
+  const [loginError, setLoginError] = React.useState('');
   const [userName, setUserName] = React.useState(localStorage.getItem('userName') || '');
 
-  // Mock for the later login service: remember the user in this browser only.
-  function signIn(e) {
-    e.preventDefault();
-    localStorage.setItem('userName', loginName);
-    setUserName(loginName);
-    setLoginName('');
-    setLoginPassword('');
+  async function authenticate(endpoint, username, password) {
+    const res = await fetch(`/api/auth/${endpoint}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, password }),
+    });
+    if (!res.ok) {
+      const body = await res.json().catch(() => ({}));
+      throw new Error(body.msg || 'Request failed');
+    }
+    localStorage.setItem('userName', username);
+    setUserName(username);
   }
 
-  function register(e) {
+  async function signIn(e) {
+    e.preventDefault();
+    try {
+      await authenticate('login', loginName, loginPassword);
+      setLoginName('');
+      setLoginPassword('');
+      setLoginError('');
+    } catch (err) {
+      setLoginError(err.message === 'Unauthorized' ? 'Incorrect username or password.' : err.message);
+    }
+  }
+
+  async function register(e) {
     e.preventDefault();
     if (regPassword !== regConfirm) {
       setRegError('Passwords do not match.');
       return;
     }
-    localStorage.setItem('userName', regName);
-    setUserName(regName);
-    setRegName('');
-    setRegEmail('');
-    setRegPassword('');
-    setRegConfirm('');
-    setRegError('');
+    try {
+      await authenticate('create', regName, regPassword);
+      setRegName('');
+      setRegEmail('');
+      setRegPassword('');
+      setRegConfirm('');
+      setRegError('');
+    } catch (err) {
+      setRegError(err.message === 'Existing user' ? 'That username is taken.' : err.message);
+    }
   }
 
-  function logout() {
+  async function logout() {
+    await fetch('/api/auth/logout', { method: 'DELETE' }).catch(() => {});
     localStorage.removeItem('userName');
     setUserName('');
   }
@@ -51,6 +73,7 @@ export function Login() {
             <label htmlFor='loginPassword'>Password</label>
             <input type='password' id='loginPassword' name='password' autoComplete='current-password' value={loginPassword} onChange={(e) => setLoginPassword(e.target.value)} required />
 
+            {loginError && <p role='alert'>{loginError}</p>}
             <button type='submit'>Sign In</button>
           </form>
         </section>
