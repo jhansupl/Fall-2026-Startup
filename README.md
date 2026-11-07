@@ -117,3 +117,15 @@ For this deliverable I did the following:
 - [x] Deployed Maze Racer with `deployReact.sh -s startup` from a clean staging folder to [startup.jonaslee.com](https://startup.jonaslee.com).
 
 Verification: the production build passes. Browser checks passed locally and on production for registration and password mismatch, login state/logout, wall collisions, timer/finish behavior, one score per race, saved-score ordering, navigation and reloads, and reward rendering with a controlled API response. A separate browser request to the real joke API returned HTTP 200 and a joke.
+
+## Startup Service Deliverable
+
+- [x] **Node.js and Express HTTP service** – `service/index.js` starts an Express app on port 4000 (or the port passed on the command line). Backend dependencies live in `service/package.json`, separate from the frontend's.
+- [x] **Frontend served by Express static middleware** – `app.use(express.static('public'))` serves the built Vite bundle, and unknown paths fall back to `index.html` for React Router.
+- [x] **Frontend calls a third party service** – the Race page fetches a joke from icanhazdadjoke.com when a race finishes (with a fallback joke if the request fails).
+- [x] **Backend service endpoints** – `POST /api/auth/create`, `POST /api/auth/login`, `DELETE /api/auth/logout`, `GET /api/scores` and `POST /api/score`.
+- [x] **Frontend calls the service endpoints** – Login registers, signs in and logs out through the auth endpoints; Scores and Home load the leaderboard from `GET /api/scores`; Race posts a finished run to `POST /api/score`. `vite.config.js` proxies `/api` to port 4000 during development.
+- [x] **Registration, login, logout and an auth-protected endpoint** – a random token is stored in an `httpOnly` cookie; `POST /api/score` runs through a `verifyAuth` middleware and returns 401 without a valid token.
+- [x] **bcrypt password hashing** – passwords are hashed with `bcryptjs` before being stored and compared with `bcrypt.compare` on login.
+
+Users and scores are held in memory by the service (the leaderboard is seeded with the starter rows), so they reset when the service restarts. A database comes in the next deliverable.
