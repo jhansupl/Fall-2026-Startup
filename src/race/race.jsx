@@ -1,5 +1,4 @@
 import React from 'react';
-import { defaultScores } from '../scores/scores';
 
 const CELL = 50;
 const SIZE = 6;
@@ -31,11 +30,6 @@ function isBlocked(col, row, dx, dy) {
     const y = Math.max(row, nr) * CELL;
     return y1 === y && y2 === y && Math.min(x1, x2) <= col * CELL && Math.max(x1, x2) >= (col + 1) * CELL;
   });
-}
-
-function toSeconds(time) {
-  const [m, sec] = time.split(':').map(Number);
-  return m * 60 + sec;
 }
 
 function formatTime(total) {
@@ -82,13 +76,18 @@ export function Race() {
       .catch(() => setJoke("Why don't scientists trust atoms? Because they make up everything!"));
   }, [finished]);
 
-  // Mock for the later scores service: add this run to the saved list, fastest first.
+  // Save the finished run through the scores service; it only accepts signed-in racers.
   React.useEffect(() => {
     if (!finished) return;
-    const saved = JSON.parse(localStorage.getItem('scores') || 'null') || defaultScores;
-    const entry = [localStorage.getItem('userName') || 'Guest', formatTime(seconds), new Date().toISOString().slice(0, 10)];
-    const updated = [...saved, entry].sort((a, b) => toSeconds(a[1]) - toSeconds(b[1]));
-    localStorage.setItem('scores', JSON.stringify(updated));
+    fetch('/api/score', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: localStorage.getItem('userName') || 'Guest',
+        time: formatTime(seconds),
+        date: new Date().toISOString().slice(0, 10),
+      }),
+    }).catch(() => {});
   }, [finished]);
 
   // Arrow keys move the marker one cell unless a wall is in the way.
