@@ -28,24 +28,24 @@ function setAuthCookie(res, user) {
 const findUser = (field, value) => users.find((u) => value && u[field] === value);
 
 apiRouter.post('/auth/create', async (req, res) => {
-  const { email, password } = req.body;
-  if (!email || !password) {
-    return res.status(400).send({ msg: 'Email and password are required' });
+  const { username, password } = req.body;
+  if (!username || !password) {
+    return res.status(400).send({ msg: 'Username and password are required' });
   }
-  if (findUser('email', email)) {
+  if (findUser('username', username)) {
     return res.status(409).send({ msg: 'Existing user' });
   }
-  const user = { email, password: await bcrypt.hash(password, 10) };
+  const user = { username, password: await bcrypt.hash(password, 10) };
   users.push(user);
   setAuthCookie(res, user);
-  res.send({ email });
+  res.send({ username });
 });
 
 apiRouter.post('/auth/login', async (req, res) => {
-  const user = findUser('email', req.body.email);
+  const user = findUser('username', req.body.username);
   if (user && (await bcrypt.compare(req.body.password || '', user.password))) {
     setAuthCookie(res, user);
-    return res.send({ email: user.email });
+    return res.send({ username: user.username });
   }
   res.status(401).send({ msg: 'Unauthorized' });
 });
