@@ -129,3 +129,5 @@ Verification: the production build passes. Browser checks passed locally and on 
 - [x] **bcrypt password hashing** – passwords are hashed with `bcryptjs` before being stored and compared with `bcrypt.compare` on login.
 
 Users and scores are held in memory by the service (the leaderboard is seeded with the starter rows), so they reset when the service restarts. A database comes in the next deliverable.
+
+Deployed with `deployService.sh -s startup` to https://startup.jonaslee.com. Caddy now reverse-proxies the subdomain to the Express service on port 4000, so `/api` calls reach the backend and the service also serves the built frontend.

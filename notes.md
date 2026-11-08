@@ -52,3 +52,4 @@ I love web programming.
 - The server's Caddyfile currently serves `startup.` and `simon.` as static files. To reach the Express service it must `reverse_proxy` to ports 4000 and 3000 instead.
 - Auth: hash with bcrypt, keep a random token on the user, and send it as an `httpOnly` cookie. Middleware checks the cookie before protected routes.
 - I tested the endpoints through the Vite proxy with curl before touching the UI.
+- Caddy edit that made it work: replace `root`/`try_files`/`file_server` with `reverse_proxy localhost:4000` in the startup block (3000 for simon), then `caddy validate` and `systemctl reload caddy`. I backed up the Caddyfile first.
