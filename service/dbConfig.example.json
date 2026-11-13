@@ -1,0 +1,5 @@
+{
+  "hostname": "your-cluster.xxxxx.mongodb.net",
+  "userName": "your-db-user",
+  "password": "your-db-password"
+}
