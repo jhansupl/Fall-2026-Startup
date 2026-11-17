@@ -11,6 +11,7 @@ const scoreCollection = db.collection('score');
   try {
     await db.command({ ping: 1 });
     console.log('Connected to database');
+    await seedScores();
   } catch (ex) {
     console.log(`Unable to connect to database with ${url.replace(/:[^:@]*@/, ':***@')} because ${ex.message}`);
     process.exit(1);
@@ -21,6 +22,25 @@ const toSeconds = (t) => {
   const [m, s] = t.split(':').map(Number);
   return m * 60 + s;
 };
+
+const starterScores = [
+  ['mazeMaster', '0:42', '2026-09-10'],
+  ['racer123', '0:51', '2026-09-11'],
+  ['wallCrawler', '1:03', '2026-09-12'],
+  ['speedySam', '1:07', '2026-09-12'],
+  ['jhan', '1:12', '2026-09-13'],
+  ['kai', '1:19', '2026-09-14'],
+  ['deadEndDan', '1:25', '2026-09-14'],
+  ['loopLucy', '1:31', '2026-09-15'],
+];
+
+async function seedScores() {
+  if ((await scoreCollection.countDocuments()) > 0) return;
+  await scoreCollection.insertMany(
+    starterScores.map(([name, time, date]) => ({ name, time, date, seconds: toSeconds(time) }))
+  );
+  console.log('Seeded starter scores');
+}
 
 function getUser(username) {
   return userCollection.findOne({ username });
