@@ -53,3 +53,13 @@ I love web programming.
 - Auth: hash with bcrypt, keep a random token on the user, and send it as an `httpOnly` cookie. Middleware checks the cookie before protected routes.
 - I tested the endpoints through the Vite proxy with curl before touching the UI.
 - Caddy edit that made it work: replace `root`/`try_files`/`file_server` with `reverse_proxy localhost:4000` in the startup block (3000 for simon), then `caddy validate` and `systemctl reload caddy`. I backed up the Caddyfile first.
+
+## Startup DB
+
+- Database credentials live in `service/dbConfig.json`, which is gitignored. `dbConfig.example.json` shows the shape (`hostname`, `userName`, `password`) without secrets. The deploy script copies `service/*.json`, so the real file reaches the server over scp and never touches git.
+- `service/database.js` is the only file that talks to MongoDB. `index.js` calls its small functions (`getUser`, `addScore`, ...), so the routes stay readable and the database could change without touching them.
+- Passwords and the connection string are URL-encoded before building the `mongodb+srv://` URL, because special characters in a password break the URI. The startup ping log masks the password.
+- Scores are stored with a numeric `seconds` field and sorted in the database (`sort({ seconds: 1 }).limit(10)`). Sorting `m:ss` strings would put `10:00` before `2:00`. The API still returns `[name, time, date]` rows, so the frontend did not change.
+- Because the data is no longer in memory, restarting the service no longer clears users or scores. Test records must be deleted from the database.
+- Logout clears the token in the database, not only the browser cookie, so a stolen cookie stops working.
+- Every route that touches the database is now `async` and must `await`. Express 5 forwards rejected promises to its error handler.
