@@ -128,6 +128,15 @@ Verification: the production build passes. Browser checks passed locally and on 
 - [x] **Registration, login, logout and an auth-protected endpoint** – a random token is stored in an `httpOnly` cookie; `POST /api/score` runs through a `verifyAuth` middleware and returns 401 without a valid token.
 - [x] **bcrypt password hashing** – passwords are hashed with `bcryptjs` before being stored and compared with `bcrypt.compare` on login.
 
-Users and scores are held in memory by the service (the leaderboard is seeded with the starter rows), so they reset when the service restarts. A database comes in the next deliverable.
+At the time of this deliverable, users and scores were held in memory by the service, so they reset when the service restarted. The Startup DB deliverable below replaced that with MongoDB.
 
 Deployed with `deployService.sh -s startup` to https://startup.jonaslee.com. Caddy now reverse-proxies the subdomain to the Express service on port 4000, so `/api` calls reach the backend and the service also serves the built frontend.
+
+## Startup DB Deliverable
+
+- [x] **Stores application data in MongoDB (50%)** – `service/database.js` connects to a MongoDB Atlas cluster (database `mazeracer`). Race results are inserted into the `score` collection by `POST /api/score` and read back by `GET /api/scores`, which returns the ten fastest times. Each document stores the display time (`m:ss`) and a numeric `seconds` field, so the database does the sorting. The 8 starter leaderboard rows are inserted once, when the collection is empty.
+- [x] **Stores and retrieves credentials in MongoDB (50%)** – registration inserts a document into the `user` collection with the bcrypt-hashed password. Login looks the user up and compares the hash. A random token is saved on the user document and sent as an `httpOnly` cookie. `verifyAuth` finds the user by that token before allowing `POST /api/score`, and logout removes the token from the database.
+- [x] **Credentials are not in the repository** – the Atlas hostname, user name and password are in `service/dbConfig.json`, which is gitignored. `service/dbConfig.example.json` shows the expected shape. The deploy script copies `service/*.json` to the server.
+- [x] Deployed to https://startup.jonaslee.com with `deployService.sh -s startup`.
+
+Verification: with the live service I registered a user, posted a score, restarted the pm2 process, and confirmed the score and login were still there. I also confirmed in the database that the stored password is a bcrypt hash, then deleted my test records. Notes on what I learned are in `notes.md`.
